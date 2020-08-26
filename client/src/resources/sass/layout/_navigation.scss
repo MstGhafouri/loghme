@@ -1,0 +1,67 @@
+.navigation {
+  background-color: lighten($color-light, $amount: 3%);
+  font-size: $default-font-size;
+  box-shadow: $shadow-sm;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  &__list {
+    align-items: center;
+  }
+
+  &__item:first-child > &__link {
+    padding-left: 0;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block;
+      color: $color-black;
+      transition: all 0.5s;
+    }
+
+    &:hover,
+    &:active {
+      transform: translateY(-0.2rem);
+    }
+  }
+
+  &__logo {
+    display: block;
+    width: 3rem;
+  }
+}
+
+#navigation-exit > .navigation__link {
+  color: $color-primary;
+}
+
+#navigation-cart {
+  position: relative;
+
+  & > a {
+    transform: translateY(-1px);
+
+    & > i::before {
+      margin-left: 0;
+      @include respond(900) {
+        font-size: 1.8rem;
+      }
+    }
+
+    & > span.badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0;
+      background-color: $color-secondary-light;
+      font-size: 60%;
+      @include respond(900) {
+        font-size: 55%;
+      }
+    }
+  }
+}

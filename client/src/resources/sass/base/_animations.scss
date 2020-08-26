@@ -1,0 +1,29 @@
+@keyframes smokyText {
+  0% {
+    transform: rotate(45deg) translateY(-20rem);
+    opacity: 0;
+    filter: blur(2rem);
+  }
+
+  100% {
+    transform: rotate(0) translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-color: $color-primary-dark;
+    box-shadow: 20px 0 0 0 rgba($color-primary, 0.2), 40px 0 0 0 rgba($color-primary, 0.2);
+  }
+
+  25% {
+    background-color: rgba($color-primary, 0.4);
+    box-shadow: 20px 0 0 0 $color-primary-dark, 40px 0 0 0 rgba($color-primary, 0.2);
+  }
+  75% {
+    background-color: rgba($color-primary, 0.4);
+    box-shadow: 20px 0 0 0 rgba($color-primary, 0.2), 40px 0 0 0 $color-primary-dark;
+  }
+}

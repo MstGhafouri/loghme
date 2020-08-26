@@ -1,0 +1,273 @@
+.profile {
+  &__header {
+    background-color: $color-primary;
+    color: $color-white;
+    padding: 9rem 1rem 1rem;
+    @extend %absCenter;
+    flex: 0 1 auto;
+
+    & * {
+      color: inherit;
+    }
+
+    &--content {
+      padding: 2rem 5rem;
+    }
+  }
+
+  &__user-box {
+    display: flex;
+    align-items: center;
+    @include respond(600) {
+      padding-right: 0.9rem;
+    }
+
+    & > i.flaticon-account::before {
+      display: inline-block;
+      margin-top: -1rem;
+      font-size: 5rem;
+    }
+  }
+
+  &__name {
+    font: {
+      size: $huge-font-size;
+      weight: 400;
+    }
+  }
+
+  &__info {
+    &-list {
+      list-style-type: none;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+
+      & > p {
+        font: {
+          size: $default-font-size;
+          weight: 300;
+        }
+      }
+    }
+  }
+
+  &-section {
+    padding: 7rem;
+    @include respond(600) {
+      padding: 7rem 1rem;
+    }
+  }
+
+  &__content {
+    background-color: $color-white;
+    @include rounded(2rem);
+    box-shadow: $shadow-sm;
+    padding: 3rem 4rem;
+    position: relative;
+    @include respond(600) {
+      padding: 3rem 2rem;
+    }
+
+    & > input[type="radio"],
+    & > .profile__tabs-body > div#credit-body,
+    div#orders-body {
+      display: none;
+    }
+  }
+
+  &__tabs {
+    width: 40rem;
+    height: 5rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-white;
+    box-shadow: $shadow-md;
+    @include rounded();
+    overflow: hidden;
+
+    &-list {
+      list-style: none;
+      margin-bottom: 0;
+      height: 100%;
+      display: flex;
+
+      & > * {
+        flex: 1;
+      }
+    }
+
+    &-item {
+      font-size: $default-font-size;
+      transition: all 0.2s;
+
+      & > * {
+        margin-bottom: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        @extend %absCenter;
+      }
+
+      &:first-child {
+        border-left: 1px dashed $color-gray;
+      }
+    }
+  }
+
+  &__credit-form {
+    display: flex;
+    justify-content: space-between;
+
+    & div:first-child {
+      flex-basis: 70%;
+      position: relative;
+
+      & > .alert {
+        position: absolute;
+        bottom: -83%;
+        right: 0;
+        left: 0;
+      }
+    }
+
+    & > button {
+      flex-basis: 25%;
+      font-size: $default-font-size;
+    }
+  }
+
+  &__orders {
+    list-style: none;
+  }
+
+  &__order {
+    display: flex;
+    align-items: center;
+    @include rounded-box($border: 1px solid lighten($color-gray, 15%));
+    margin-bottom: 2rem;
+    background-color: $color-light;
+
+    & > * {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    & > span,
+    & > p {
+      border-left: 1px solid lighten($color-gray, 15%);
+    }
+
+    & > span {
+      flex-basis: 10%;
+    }
+
+    & > p {
+      flex-basis: 55%;
+    }
+
+    & > div {
+      flex-basis: 35%;
+      & > * {
+        width: 60%;
+        margin: 0 auto;
+        font-size: $small-font-size;
+        @include respond(600) {
+          width: 85%;
+        }
+      }
+    }
+  }
+
+  &__orders-table {
+    text-align: center;
+
+    & thead {
+      font-size: $small-font-size;
+      background-color: $color-gray-light;
+      color: $color-gray;
+      & th:first-of-type {
+        width: 3rem;
+        overflow: hidden;
+      }
+    }
+
+    & tbody {
+      font-size: $default-font-size;
+      @include respond(600) {
+        font-size: $small-font-size;
+      }
+    }
+  }
+}
+
+#credit-body,
+#orders-body {
+  margin: 0 auto;
+  font-size: $default-font-size;
+  padding: 2rem 0;
+}
+
+#credit-body {
+  width: 40rem;
+}
+
+#orders-body {
+  width: 60%;
+  @include respond(1200) {
+    width: 75%;
+  }
+  @include respond(1000) {
+    width: 85%;
+  }
+  @include respond(900) {
+    width: 90%;
+  }
+  @include respond(600) {
+    width: 95%;
+  }
+}
+
+.profile-popup__content {
+  @include rounded(2rem);
+  padding: 2rem 5rem;
+  width: 45vw;
+  height: auto;
+  overflow-y: auto;
+  @include respond(1200) {
+    width: 55vw;
+  }
+  @include respond(1000) {
+    width: 70vw;
+  }
+  @include respond(600) {
+    width: 85vw;
+  }
+
+  & .heading-primary {
+    @include border-bt($color-gray);
+  }
+
+  & div.popup__body {
+    padding: 1rem 0;
+  }
+}
+
+p#total-price {
+  font-size: $default-font-size;
+}
+
+#creditTab:checked ~ .profile__tabs-body > #credit-body,
+#ordersTab:checked ~ .profile__tabs-body > #orders-body {
+  display: block;
+}
+
+#creditTab:checked ~ .profile__tabs .item2,
+#ordersTab:checked ~ .profile__tabs .item1 {
+  background-color: $color-primary;
+  color: $color-white;
+}

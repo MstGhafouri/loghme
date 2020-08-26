@@ -1,0 +1,83 @@
+.restaurant {
+  &__header {
+    background-color: $color-primary;
+    position: relative;
+    padding: 12rem 0;
+    &--fig {
+      width: 20rem;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    &--img {
+      @include rounded(1rem);
+      display: block;
+      box-shadow: $shadow-sm;
+      width: 100%;
+      max-height: 20rem;
+    }
+  }
+
+  &__container {
+    // border-right: 2px dashed darken($color-gray-light, 15%);
+    background: {
+      image: linear-gradient(darken($color-gray-light, 15%) 50%, rgba($color-white, 0) 0%);
+      position: right;
+      size: 1.5px 1.3rem;
+      repeat: repeat-y;
+    }
+    @include respond(992) {
+      background: none;
+      border-bottom: 1.5px dashed darken($color-gray-light, 15%);
+      width: 85%;
+    }
+  }
+
+  &-menu {
+    padding: 11rem 0 5rem;
+
+    & > h1.heading-secondary {
+      @include respond(992) {
+        margin-bottom: 3rem;
+      }
+    }
+
+    &__cart {
+      @include respond(992) {
+        width: 50%;
+        margin: 0 auto;
+      }
+      @include respond(600) {
+        width: 80%;
+      }
+    }
+  }
+
+  &__cards {
+    width: 95%;
+    @include respond(992) {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  &__card {
+    &--img {
+      display: block;
+      width: 50%;
+      height: 10rem;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+      @include rounded();
+    }
+  }
+}
+
+#food-menu-heading {
+  transform: translateX(2.7vw);
+  @include respond(992) {
+    transform: translateX(0);
+  }
+}

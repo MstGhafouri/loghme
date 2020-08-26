@@ -1,0 +1,24 @@
+.section-foodParty {
+  padding: 7rem 0 3rem;
+  // position: relative;
+
+  #foodParty-carousel {
+    padding: 3rem 0;
+    box-shadow: 0 0px 7px rgba($color-black, 0.2);
+    overflow: hidden;
+  }
+
+  .remaining-time-box > p {
+    display: inline-block;
+    font-size: $small-font-size;
+    background-color: lighten($color-secondary-light, 35%);
+    color: $color-secondary;
+    @include rounded-box($border: 1px solid $color-secondary);
+  }
+}
+
+.section-restaurants {
+  min-height: 40rem;
+  padding: 2rem 0 5rem;
+  position: relative;
+}

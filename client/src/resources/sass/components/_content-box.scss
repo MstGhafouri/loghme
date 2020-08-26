@@ -1,0 +1,51 @@
+.content-box {
+  min-height: 50vh;
+  width: 60%;
+  background-color: $color-white;
+  box-shadow: $shadow-md;
+  @include rounded(1rem);
+  position: relative;
+  padding: 4rem 5rem;
+  @include respond(1100) {
+    width: 70%;
+    height: auto;
+  }
+  @include respond(1000) {
+    width: 75%;
+  }
+
+  &__heading {
+    @include rounded(1rem);
+    padding: 1rem 2.5rem;
+    background-color: $color-white;
+    box-shadow: $shadow-md;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(to right bottom, $color-primary, darken($color-primary, 5%));
+    color: $color-white;
+    transition: all 0.5s;
+    @include respond(600) {
+      padding: 0.7rem 1.5rem;
+      width: 60%;
+      text-align: center;
+    }
+
+    &:hover {
+      padding: 1rem 3.5rem;
+      > h1 {
+        letter-spacing: 0.3rem;
+      }
+    }
+
+    & > h1 {
+      transition: all 0.5s;
+      font: {
+        size: 2.2rem;
+        weight: 400;
+      }
+      letter-spacing: 0.2rem;
+    }
+  }
+}

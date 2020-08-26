@@ -1,0 +1,19 @@
+.loading-container {
+  z-index: 20000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color-white, $alpha: 0.77);
+  @extend %absCenter;
+
+  .loader {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: loading 1s linear infinite alternate;
+    position: relative;
+    left: -12px;
+    background-color: $color-primary-dark;
+  }
+}

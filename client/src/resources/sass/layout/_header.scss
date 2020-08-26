@@ -1,0 +1,100 @@
+.header {
+  height: 53vh;
+  position: relative;
+  @extend %absCenter;
+  @include respond(1000) {
+    height: 48vh;
+  }
+  @include respond(900) {
+    height: 43vh;
+  }
+  background: {
+    image: linear-gradient(to right bottom, rgba($color-primary, 0.7), rgba($color-primary, 0.8)),
+      url("../../img/cover-bg.jpg");
+    size: cover;
+    position: 55% 50%;
+    repeat: no-repeat;
+  }
+
+  &__logo {
+    display: inline-block;
+    width: 15rem;
+    @include respond(600) {
+      width: 12rem;
+    }
+  }
+
+  &__logo-box {
+    @include respond(1000) {
+      margin-top: 4rem;
+    }
+    @include respond(900) {
+      margin-top: 8rem;
+    }
+    @include respond(600) {
+      margin-top: 5rem;
+    }
+  }
+
+  &__search-box {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+  }
+
+  &__search-form {
+    width: 50%;
+
+    @include respond(1000) {
+      width: 65%;
+    }
+    @include respond(900) {
+      width: 75%;
+    }
+    @include respond(600) {
+      width: 85%;
+    }
+    font: {
+      size: 1.8rem;
+      weight: 300;
+    }
+
+    & > .row {
+      @include rounded-box();
+      height: 7rem;
+      box-shadow: $shadow-md;
+    }
+
+    & input {
+      height: 100%;
+    }
+  }
+
+  &__text {
+    font-size: 2.3rem;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    @include respond(600) {
+      font-size: 2rem;
+      flex-wrap: wrap;
+      width: 60%;
+      margin: 0 auto;
+    }
+    &--letter {
+      color: $color-light;
+      letter-spacing: 0.2rem;
+      padding: 0 0.3rem;
+      animation: smokyText 1.5s;
+      animation-fill-mode: backwards;
+
+      $step: 0;
+      @for $i from 1 through 12 {
+        &:nth-child(#{$i}) {
+          animation-delay: 0s + $step;
+        }
+        $step: $step + 0.4;
+      }
+    }
+  }
+}

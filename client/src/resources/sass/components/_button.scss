@@ -1,0 +1,56 @@
+.animated-btn {
+  &.disabled {
+    cursor: not-allowed;
+    &::before {
+      display: none;
+    }
+  }
+
+  @include rounded();
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  width: 95%;
+  height: auto;
+  font-size: inherit;
+  font-weight: inherit;
+  transition: all 0.3s;
+  overflow: hidden;
+
+  &--gold {
+    background-color: $color-gold;
+    &:hover {
+      background-color: darken($color-gold, 9%);
+    }
+  }
+
+  &--light {
+    background-color: $color-secondary-light;
+    color: $color-white;
+    &:hover {
+      color: $color-white;
+      background-color: darken($color-secondary-light, 9%);
+    }
+  }
+
+  &--space {
+    letter-spacing: 2px;
+  }
+
+  &::before {
+    content: "";
+    background-color: $color-white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    transform: translateX(-100%) rotate(45deg);
+    transition: all 0.3s;
+  }
+
+  &:hover::before {
+    transform: translateX(100%) rotate(45deg);
+  }
+}

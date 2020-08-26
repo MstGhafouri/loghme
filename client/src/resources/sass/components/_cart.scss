@@ -1,0 +1,72 @@
+.cart {
+  padding: 0 1.5rem;
+
+  &__content {
+    @include rounded(1rem);
+    text-align: center;
+    background-color: $color-white;
+    box-shadow: $shadow-md;
+    padding: 1.5rem;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 1rem 2rem;
+    @include rounded-box($radius: 2.5rem, $border: 1.7px dashed darken($color-gray-light, 15%));
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid $color-gray-light;
+
+    &--name {
+      font: {
+        size: $default-font-size;
+        weight: 300;
+      }
+      color: darken($color-gray, 20%);
+      max-width: 70%;
+      overflow: hidden;
+      text-align: right;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &--price {
+      text-align: left;
+      font-size: $small-font-size;
+    }
+
+    &--info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      & > .quantity-box > i[class^="flaticon"] {
+        &::before {
+          font-size: 17px;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &__heading {
+    display: inline-block;
+    @include border-bt($color-gray);
+  }
+
+  &__finalize-btn {
+    display: inline-block;
+    width: 44%;
+    margin: 0 auto;
+    color: $color-white;
+    font-size: $default-font-size;
+    @include respond(1100) {
+      width: 55%;
+    }
+  }
+}

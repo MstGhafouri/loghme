@@ -1,0 +1,42 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    background-color: $color-light;
+    color: $color-black;
+    display: flex;
+    margin: 7rem 3rem 2rem;
+
+    & > li {
+      display: inline-block;
+      font-size: $default-font-size;
+      margin: 0 1.5rem;
+      border: 1px solid $color-gray;
+      color: darken($color-gray, 50%);
+      border-radius: 0.3rem;
+      cursor: pointer;
+
+      &.disabled {
+        cursor: not-allowed;
+      }
+
+      &.active {
+        background-color: $color-primary;
+        color: $color-white;
+        border: none;
+        box-shadow: $shadow-md;
+      }
+
+      & > a {
+        @extend %absCenter;
+        padding: 0.3rem 1rem;
+        width: 100%;
+        height: 100%;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

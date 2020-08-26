@@ -1,0 +1,28 @@
+.quantity-box {
+  @extend %absCenter;
+
+  & > i.flaticon-plus,
+  & > i.flaticon-minus {
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  & > i.flaticon-plus::before {
+    margin-left: 0;
+  }
+
+  & > span {
+    display: inline-block;
+    margin: 0 0.6rem;
+    font-size: 2rem;
+  }
+}

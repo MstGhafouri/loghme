@@ -1,0 +1,23 @@
+.register-section,
+.login-section {
+  padding: 17rem 0 5rem;
+  @extend %absCenter;
+}
+
+.register {
+  &__form {
+    padding: 2rem 1rem;
+    font: {
+      size: $default-font-size;
+      weight: 300;
+    }
+
+    & a {
+      text-decoration: underline;
+    }
+  }
+
+  &__input {
+    padding: 0.5rem 1.5rem;
+  }
+}

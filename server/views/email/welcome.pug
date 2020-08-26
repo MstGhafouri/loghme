@@ -1,0 +1,17 @@
+extends baseEmail
+
+block content
+  p سلام #{firstName}
+  p به لقمه خوش آمدید 🎉🙏
+  p از اینکه به خانواده لقمه ملحق شدید، از شما سپاس گزاریم
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') آپلود تصویر
+  p در صورت داشتن هر گونه سوال، با ما تماس بگیرید
+  p - Mostafa Ghafouri, CEO
