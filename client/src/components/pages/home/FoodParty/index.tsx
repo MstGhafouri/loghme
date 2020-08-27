@@ -9,7 +9,7 @@ class FoodParty extends React.Component<FoodPartyProps> {
   render() {
     return (
       <section className="section-foodParty">
-        <CustomTitle text="جشن غذا!" classNm="mb-4" />
+        <CustomTitle text="جشن غذا !" classNm="mb-4" />
         <Timer />
         <FoodPartyList />
       </section>

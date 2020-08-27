@@ -5,6 +5,8 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.get('/slug/:slug', restaurantController.getRestaurantBySlug);
+router.get('/food-parties', restaurantController.getFoodParties);
+router.get('/remaining-time', restaurantController.getRemainingTime);
 
 router
   .route('/')

@@ -19,12 +19,12 @@ export interface FoodPartyListProps {
 
 class FoodPartyList extends React.Component<FoodPartyListProps> {
   componentDidMount() {
-    // this.props.fetchFoodParties();
+    this.props.fetchFoodParties();
   }
 
   componentDidUpdate() {
     if (this.props.stoppedAt) {
-      // this.props.fetchFoodParties();
+      this.props.fetchFoodParties();
     }
   }
 
