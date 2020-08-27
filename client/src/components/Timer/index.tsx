@@ -12,7 +12,7 @@ export interface TimerProps extends TimerStateType {
 
 class Timer extends React.Component<TimerProps> {
   interval: any;
-  baseTime = 1800000; // 30 * 60 * 1000 = 30 min
+  baseTime = 3600000; // 60 * 60 * 1000 = 60 min
 
   componentDidMount() {
     this.interval = setInterval(this.forceUpdate.bind(this), 1000);

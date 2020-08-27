@@ -101,7 +101,7 @@ exports.getRestaurantBySlug = catchAsync(async (req, res, next) => {
 });
 
 let startTime;
-const INTERVAL = 30 * 60 * 1000; // 30 minutes
+const INTERVAL = 60 * 60 * 1000; // 60 minutes
 let foodParties = [];
 let isTimeFinished = false;
 
