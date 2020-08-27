@@ -67,9 +67,12 @@ export const googleSignIn = ({ email, givenName, familyName }: TempUser) => {
     try {
       dispatch({ type: ActionTypes.googleSignInRequest });
 
-      const response = await loghmeApi.post<{ data: { user: User }; token: string }>("/users/google-login", {
-        email
-      });
+      const response = await loghmeApi.post<{ data: { user: User }; token: string }>(
+        "/users/google-login",
+        {
+          email
+        }
+      );
 
       if (response.data.data) {
         dispatch<SignInUserAction>({
@@ -214,6 +217,57 @@ export const fetchUserOrders = (userId: string) => {
       });
     } catch (error) {
       dispatch({ type: ActionTypes.getUserOrdersFailure, payload: error });
+      handleException(error, dispatch);
+    }
+  };
+};
+
+export const forgotPassword = (email: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch({ type: ActionTypes.forgotPasswordRequest });
+
+      const response = await loghmeApi.post<{ message: string }>("/users/forgot-password", {
+        email
+      });
+      dispatch({
+        type: ActionTypes.forgotPasswordSuccess,
+        payload: response.data.message
+      });
+      displayConditionalToast(StatusCodes.success, response.data.message);
+    } catch (error) {
+      dispatch({ type: ActionTypes.forgotPasswordFailure, payload: error });
+      handleException(error, dispatch);
+    }
+  };
+};
+
+export const changeUserPassword = (
+  data: { password: string; passwordConfirm: string },
+  token: string
+) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch({ type: ActionTypes.resetPasswordRequest });
+
+      const response = await loghmeApi.patch<{ data: { user: User }; token: string }>(
+        `/users/reset-password/${token}`,
+        data
+      );
+      dispatch({
+        type: ActionTypes.resetPasswordSuccess,
+        payload: response.data.data.user
+      });
+      localStorage.setItem("token", response.data.token);
+      dispatch(setCurrentUser(response.data.data.user));
+      dispatch({
+        type: ActionTypes.setSearchParams,
+        payload: { restaurantName: undefined, foodName: undefined }
+      });
+      displayConditionalToast(StatusCodes.success, "تغییر رمزعبور شما با موفقیت انجام شد");
+      history.push("/profile");
+    } catch (error) {
+      dispatch({ type: ActionTypes.resetPasswordFailure, payload: error });
       handleException(error, dispatch);
     }
   };

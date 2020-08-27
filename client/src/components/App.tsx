@@ -9,6 +9,7 @@ import Layout from "./Hoc/Layout";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
 import SignIn from "./pages/signin";
+import PasswordReset from './pages/passwordReset';
 import UserProfile from "./pages/userProfile";
 import Restaurant from "./pages/restaurant";
 import NotFound from "./pages/404";
@@ -38,6 +39,12 @@ function App({ currentUser, temporaryUser }: AppProps): JSX.Element {
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/restaurant/:slug" exact component={Restaurant} />
+          <Route
+            path="/profile"
+            exact
+            render={() => (currentUser ? <UserProfile /> : <Redirect to="/signin" />)}
+          />
           <Route
             path="/signup"
             exact
@@ -51,11 +58,15 @@ function App({ currentUser, temporaryUser }: AppProps): JSX.Element {
             render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
           />
           <Route
-            path="/profile"
+            path="/password-reset"
             exact
-            render={() => (currentUser ? <UserProfile /> : <Redirect to="/signin" />)}
+            render={() => (currentUser ? <Redirect to="/" /> : <PasswordReset />)}
           />
-          <Route path="/restaurant/:slug" exact component={Restaurant} />
+          <Route
+            path="/password-reset/:token"
+            exact
+            render={() => (currentUser ? <Redirect to="/" /> : <PasswordReset />)}
+          />
           <Route path="/404" exact component={NotFound} />
           <Redirect to="/404" />
         </Switch>

@@ -17,7 +17,10 @@ export const displayConditionalToast = function (statusCode: number, message?: s
       break;
     case StatusCodes.forbidden:
       toast.error(
-        <CustomToast message={message || "امکان مشاهده‌ این صفحه برای شما وجود ندارد"} header="خطا" />
+        <CustomToast
+          message={message || "امکان مشاهده‌ این صفحه برای شما وجود ندارد"}
+          header="خطا"
+        />
       );
       break;
     case StatusCodes.unauthorized:
@@ -50,10 +53,20 @@ export const displayConditionalToast = function (statusCode: number, message?: s
       toast.error(<CustomToast message="موجودی حساب شما کافی نمی‌باشد" header="خطا" />);
       break;
     case StatusCodes.unauthorizedUser:
-      toast.info(<CustomToast message={message || "لطفا برای ثبت سفارش ابتدا وارد سایت شوید"} header="توجه" />);
+      toast.info(
+        <CustomToast
+          message={message || "لطفا برای ثبت سفارش ابتدا وارد سایت شوید"}
+          header="توجه"
+        />
+      );
       break;
     case StatusCodes.successfulRaiseCredit:
       toast.success(<CustomToast message="افزایش اعتبار شما با موفقیت انجام شد" />, {
+        autoClose: 3000
+      });
+      break;
+    case StatusCodes.success:
+      toast.success(<CustomToast message={message || "عملیات با موفقیت انجام شد"} />, {
         autoClose: 3000
       });
   }

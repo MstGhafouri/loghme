@@ -44,11 +44,11 @@ type userFields = {
 };
 export type User = userFields | null;
 
-export type TempUser = { 
+export type TempUser = {
   email: string;
   givenName: string;
   familyName: string;
-}
+};
 
 export interface signUpFormParams {
   firstName: string;
@@ -116,6 +116,14 @@ export enum ActionTypes {
   googleSignInSuccess = "GOOGLE_SIGN_IN_SUCCESS",
   googleSignInFailure = "GOOGLE_SIGN_IN_FAILURE",
 
+  forgotPasswordRequest = "FORGOT_PASSWORD_REQUEST",
+  forgotPasswordSuccess = "FORGOT_PASSWORD_SUCCESS",
+  forgotPasswordFailure = "FORGOT_PASSWORD_FAILURE",
+
+  resetPasswordRequest = "RESET_PASSWORD_REQUEST",
+  resetPasswordSuccess = "RESET_PASSWORD_SUCCESS",
+  resetPasswordFailure = "RESET_PASSWORD_FAILURE",
+
   handleModals = "HANDLE_MODALS",
   setCurrentUser = "SET_CURRENT_USER",
   addToCart = "ADD_TO_CART",
@@ -138,7 +146,9 @@ export type asyncActionsNameType =
   | "FINALIZE_ORDER"
   | "SIGN_IN_USER"
   | "SIGN_UP_USER"
-  | "GOOGLE_SIGN_IN";
+  | "GOOGLE_SIGN_IN"
+  | "RESET_PASSWORD"
+  | "FORGOT_PASSWORD";
 
 export enum StatusCodes {
   notFound = 404,

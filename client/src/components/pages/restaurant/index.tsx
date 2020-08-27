@@ -22,7 +22,7 @@ export interface RestaurantProps extends RouteComponentProps<MatchParams> {
 
 class Restaurant extends React.Component<RestaurantProps> {
   componentDidMount() {
-    document.title = "رستوران";
+    document.title = "رستوران - لقمه";
     const { fetchRestaurant, match } = this.props;
     fetchRestaurant(match.params.slug);
   }

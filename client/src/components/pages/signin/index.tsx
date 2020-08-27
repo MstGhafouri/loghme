@@ -101,7 +101,7 @@ class SignIn extends React.Component<SignInProps & InjectedFormProps<{}, SignInP
                 validate={[Validator.required, Validator.minLength7]}
               />
               <div className="col-md-7 mx-auto mb-4">
-                <Link to="#" className="font-weight-light u-font-size-sm">
+                <Link to="/password-reset" className="font-weight-light u-font-size-sm">
                   رمز‌عبور خود را فراموش کرده‌ام
                 </Link>
               </div>
