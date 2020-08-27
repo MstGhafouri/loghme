@@ -25,7 +25,12 @@ app.use(cors());
 // Browsers send options request to check if is safe to send actual request!  ):
 // So we need to send  Access Control Origin Header !
 app.options('*', cors());
-app.use(helmet()); // Set secure headers
+// Set secure headers, except CSP!
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+);
 // Limit requests from the same IP to protect against attacks ( brute force !)
 const limiter = rateLimit({
   max: 100, // Max api request
