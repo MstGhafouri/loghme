@@ -12,7 +12,6 @@ import CustomInput from "../../ui/customInput";
 import CustomBox from "../../ui/customBox";
 import AlertBox from "../../ui/alertBox";
 import Loader from "../../Loader";
-import icon from "../../../resources/img/icons-google.png";
 
 export interface SignInProps {
   signInUser: Function;
@@ -71,7 +70,12 @@ class SignIn extends React.Component<SignInProps & InjectedFormProps<{}, SignInP
     return (
       <div>
         <span>ورود با حساب‌کاربری گوگل</span>
-        <img src={icon} alt="google" height="25" className="mx-3" />
+        <img
+          src={`${process.env.PUBLIC_URL}/img/icons/icons-google.png`}
+          alt="google"
+          height="25"
+          className="mx-3"
+        />
       </div>
     );
   };
