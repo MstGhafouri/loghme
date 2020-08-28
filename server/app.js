@@ -13,6 +13,7 @@ const cors = require('cors');
 const globalErrorHandler = require('./controllers/errorController');
 const restaurantRouter = require('./routes/restaurantRoutes');
 const userRouter = require('./routes/userRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 const app = express();
 // Enable trust proxy for heroku headers
@@ -67,6 +68,7 @@ if (process.env.NODE_ENV === 'development') {
 // ROUTES HANDLERS
 app.use('/api/v1/restaurants', restaurantRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/orders', orderRouter);
 
 // Catch all unknown routes ( this middleware runs after all routes have been defined !)
 if (process.env.NODE_ENV === 'production') {

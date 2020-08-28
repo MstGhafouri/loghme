@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const orderController = require('../controllers/orderController');
 const authController = require('../controllers/authController');
 
 const router = express.Router();
@@ -15,6 +16,7 @@ router.patch('/reset-password/:token', authController.resetPassword);
 router.use(authController.protect);
 
 router.get('/me', userController.getMe, userController.getUser);
+router.get('/my-orders', orderController.getMyOrders);
 router.patch('/updatePassword', authController.updatePassword);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
