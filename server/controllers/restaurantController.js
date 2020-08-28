@@ -92,6 +92,9 @@ exports.getRestaurantBySlug = catchAsync(async (req, res, next) => {
     return next(new AppError('رستورانی با نام درخواستی یافت نشد', 404));
   }
 
+  // Remove food parties from the restaurant's menu
+  restaurant.menu = restaurant.menu.filter(food => !food.oldPrice);
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -102,6 +105,7 @@ exports.getRestaurantBySlug = catchAsync(async (req, res, next) => {
 
 let startTime;
 const INTERVAL = 60 * 60 * 1000; // 60 minutes
+exports.INTERVAL = INTERVAL;
 let foodParties = [];
 let isTimeFinished = false;
 
@@ -132,12 +136,13 @@ fetchFoodParties();
 setInterval(fetchFoodParties, INTERVAL);
 
 exports.getFoodParties = catchAsync(async (req, res, next) => {
-  if (!isTimeFinished && foodParties.length === 0) {
+  const { isUpdated } = req.query;
+  if ((!isTimeFinished && foodParties.length === 0) || isUpdated === '1') {
     // 1. First find all restaurants which have at least one foodParty
     const restaurants = await Restaurant.find({
       'menu.oldPrice': { $exists: true, $ne: null }
     });
-    // 2. Loop through the restaurants and filter those which are 30 minutes old
+    // 2. Loop through the restaurants and filter those which are 60 minutes old
     restaurants.forEach(restaurant => {
       restaurant.menu = restaurant.menu.filter(
         food =>
@@ -150,7 +155,6 @@ exports.getFoodParties = catchAsync(async (req, res, next) => {
       restaurant => restaurant.menu.length !== 0
     );
   }
-
   if (!isTimeFinished)
     return res.status(200).json({
       status: 'success',
@@ -159,7 +163,6 @@ exports.getFoodParties = catchAsync(async (req, res, next) => {
         restaurants: foodParties
       }
     });
-
   res.status(200).json({
     status: 'success',
     results: 0,
