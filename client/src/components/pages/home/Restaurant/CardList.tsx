@@ -11,7 +11,7 @@ const CardList: React.SFC<CardListProps> = props => {
     <div className="container">
       <div className="row">
         {props.restaurants.map(restaurant => (
-          <CardItem key={restaurant.id} {...restaurant} />
+          <CardItem key={restaurant._id} {...restaurant} />
         ))}
       </div>
     </div>

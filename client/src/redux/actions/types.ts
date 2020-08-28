@@ -1,5 +1,5 @@
 export interface FoodType {
-  id: number;
+  _id: string;
   name: string;
   description: string;
   image: string;
@@ -13,7 +13,7 @@ export interface FoodPartyType extends FoodType {
 }
 
 export interface RestaurantsType {
-  id: string;
+  _id: string;
   name: string;
   logo: string;
   slug: string;
@@ -31,11 +31,11 @@ export interface CartItemType {
   quantity: number;
   price: number;
   restaurantId: string;
-  id: number;
+  itemId: string;
 }
 
 type userFields = {
-  id: number;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -59,22 +59,21 @@ export interface signUpFormParams {
   passwordConfirm: string;
 }
 
-export type orderStatus = "done" | "findingDelivery" | "delivering";
+export type orderStatus = "delivered" | "findingDelivery" | "delivering";
 
 export interface Orders {
-  userId: number;
   restaurantId: string;
   totalAmount: number;
   cartItems: CartItemType[];
 }
 
 export interface FinalizedOrders {
-  id: number;
-  totalAmount: number;
+  _id: string;
+  totalPrice: number;
   restaurantName: string;
+  restaurantId: string;
   status: orderStatus;
-  size: number;
-  orders: CartItemType[];
+  cartItems: CartItemType[];
 }
 
 export type searchParamsType = { restaurantName?: string; foodName?: string };

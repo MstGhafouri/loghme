@@ -19,7 +19,7 @@ class OrdersList extends React.Component<OrdersListProps> {
     if (isFetching) return;
     return userOrders
       .reverse()
-      .map((order, i) => <OrderItem key={order.id} {...order} index={i + 1} />);
+      .map((order, i) => <OrderItem key={order._id} {...order} index={i + 1} />);
   };
 
   render() {

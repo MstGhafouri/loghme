@@ -29,8 +29,8 @@ class CartContent extends React.Component<CartContentProps> {
       displayConditionalToast(StatusCodes.unauthorizedUser);
       return;
     }
-    const { cartItems, totalAmount, finalizeOrder, restaurantId, currentUser } = this.props;
-    finalizeOrder({ totalAmount, cartItems, restaurantId, userId: currentUser.id });
+    const { cartItems, totalAmount, finalizeOrder, restaurantId } = this.props;
+    finalizeOrder({ totalAmount, cartItems, restaurantId });
   };
 
   render() {

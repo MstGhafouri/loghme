@@ -190,10 +190,10 @@ export const finalizeOrder = (items: Orders) => {
 
       dispatch({ type: ActionTypes.finalizeOrderRequest });
 
-      const response = await loghmeApi.post<{ data: User }>("/finalize-order", items);
+      const response = await loghmeApi.post<{ data: { user: User } }>("/orders/finalize", items);
       dispatch<FinalizeOrderAction>({
         type: ActionTypes.finalizeOrderSuccess,
-        payload: response.data.data
+        payload: response.data.data.user
       });
       dispatch(removeAllCartItems());
       displayConditionalToast(StatusCodes.successfulFinalizedOrders);
@@ -205,15 +205,17 @@ export const finalizeOrder = (items: Orders) => {
   };
 };
 
-export const fetchUserOrders = (userId: string) => {
+export const fetchUserOrders = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: ActionTypes.getUserOrdersRequest });
 
-      const response = await loghmeApi.get<{ data: FinalizedOrders[] }>(`/orders/${userId}`);
+      const response = await loghmeApi.get<{ data: { orders: FinalizedOrders[] } }>(
+        "/users/my-orders"
+      );
       dispatch<FetchUserOrdersAction>({
         type: ActionTypes.getUserOrdersSuccess,
-        payload: response.data.data
+        payload: response.data.data.orders
       });
     } catch (error) {
       dispatch({ type: ActionTypes.getUserOrdersFailure, payload: error });

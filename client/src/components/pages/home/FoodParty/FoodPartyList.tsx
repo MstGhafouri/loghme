@@ -42,7 +42,7 @@ class FoodPartyList extends React.Component<FoodPartyListProps> {
           <FoodPartyItem
             key={food.name}
             restaurantName={restaurant.name}
-            restaurantId={restaurant.id}
+            restaurantId={restaurant._id}
             {...food}
           />
         );

@@ -47,7 +47,7 @@ class FoodModalContent extends React.Component<FoodModalContentProps> {
       type,
       maxCount,
       cartItemQuantity,
-      id
+      _id
     } = this.props;
 
     return (
@@ -101,7 +101,7 @@ class FoodModalContent extends React.Component<FoodModalContentProps> {
                 restaurantId,
                 type,
                 maxCount,
-                id,
+                itemId: _id,
                 quantity: this.state.quantity + cartItemQuantity
               })
             }

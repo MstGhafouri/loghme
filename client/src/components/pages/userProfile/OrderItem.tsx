@@ -27,7 +27,7 @@ class OrderItem extends React.Component<OrderItemProps> {
       textStyle: "text-primary px-2 py-1",
       text: "در جست‌وجو پیک"
     },
-    done: {
+    delivered: {
       classNm: "animated-btn--gold",
       text: "مشاهده فاکتور",
       textStyle: ""
@@ -35,7 +35,7 @@ class OrderItem extends React.Component<OrderItemProps> {
   };
 
   renderBody = (): JSX.Element[] => {
-    return this.props.orders.map((food, i) => {
+    return this.props.cartItems.map((food, i) => {
       return (
         <tr key={i}>
           <td>{toPersianDigits(i + 1)}</td>
@@ -49,12 +49,12 @@ class OrderItem extends React.Component<OrderItemProps> {
 
   renderStatusBox = (status: orderStatus): ReactNode => {
     const { classNm, text, textStyle } = this.config[status];
-    if (status === "done")
+    if (status === "delivered")
       return (
         <CustomBtn
           text={text}
           classNm={classNm}
-          onClick={e => this.props.handleModals(true, this.props.id.toString())}
+          onClick={e => this.props.handleModals(true, this.props._id.toString())}
         />
       );
     return (
@@ -65,7 +65,7 @@ class OrderItem extends React.Component<OrderItemProps> {
   };
 
   render() {
-    const { index, restaurantName, status, clickedModal, id, totalAmount } = this.props;
+    const { index, restaurantName, status, clickedModal, _id, totalPrice } = this.props;
     return (
       <React.Fragment>
         <li className="profile__order">
@@ -74,13 +74,13 @@ class OrderItem extends React.Component<OrderItemProps> {
           <div>{this.renderStatusBox(status)}</div>
         </li>
         <Popup
-          open={clickedModal.open && clickedModal.name === id.toString()}
-          name={id.toString()}
+          open={clickedModal.open && clickedModal.name === _id.toString()}
+          name={_id.toString()}
           contentClassNm="profile-popup__content"
         >
           <OrderModalContent
             restaurantName={restaurantName}
-            totalPrice={totalAmount}
+            totalPrice={totalPrice}
             tBody={this.renderBody()}
           />
         </Popup>

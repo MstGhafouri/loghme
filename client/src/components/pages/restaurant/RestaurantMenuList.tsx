@@ -9,12 +9,12 @@ export interface RestaurantMenuListProps {
 class RestaurantMenuList extends React.Component<RestaurantMenuListProps> {
   renderMenuItems = () => {
     const {
-      restaurant: { menu, id, name }
+      restaurant: { menu, _id, name }
     } = this.props;
     return menu.map(food => {
       return (
         <div className="col-lg-4 col-sm-6 px-xl-4 px-3 mb-5" key={food.name}>
-          <RestaurantMenuItem {...food} restaurantName={name} restaurantId={id} type="food" />
+          <RestaurantMenuItem {...food} restaurantName={name} restaurantId={_id} type="food" />
         </div>
       );
     });

@@ -24,10 +24,12 @@ export const handleFoodPartyCartItem = async (
   const hasFoodParty = selectedItems.find(item => item.type === "foodParty");
 
   if (hasFoodParty) {
-    const response = await loghmeApi.get<{ data: FoodPartiesType[] }>("/food-parties");
+    const response = await loghmeApi.get<{ data: { restaurants: FoodPartiesType[] } }>(
+      "/restaurants/food-parties?isUpdated=1"
+    );
     dispatch<FetchFoodPartiesAction>({
       type: ActionTypes.getFoodPartiesSuccess,
-      payload: response.data.data
+      payload: response.data.data.restaurants
     });
   }
 };

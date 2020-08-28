@@ -30,7 +30,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
             <div className="profile__tabs">
               <ul className="profile__tabs-list">
                 <li className="profile__tabs-item item1">
-                  <label htmlFor="ordersTab" onClick={() => fetchUserOrders(currentUser!?.id)}>
+                  <label htmlFor="ordersTab" onClick={() => fetchUserOrders()}>
                     سفارش‌ها
                   </label>
                 </li>
