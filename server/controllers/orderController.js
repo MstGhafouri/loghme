@@ -47,7 +47,7 @@ exports.finalizeOrder = catchAsync(async (req, res, next) => {
       );
     }
     // Check if food type is foodParty
-    if ('oldPrice' in food) {
+    if (food.oldPrice) {
       // Check if food quantity is not zero
       if (food.count === 0) {
         return next(
