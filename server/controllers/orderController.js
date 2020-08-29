@@ -5,8 +5,48 @@ const User = require('../models/userModel');
 const Restaurant = require('../models/restaurantModel');
 const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
+const Delivery = require('../utils/delivery');
 const catchAsync = require('../utils/catchAsync');
+const fetchResources = require('../utils/fetchResources');
 const { INTERVAL } = require('./restaurantController');
+
+const _setOrderStatus = (orId, restLoc) => {
+  const interval = setInterval(
+    (function backgroundTask() {
+      (async () => {
+        // Fetch deliveries every 30 seconds
+        const response = await fetchResources('deliveries');
+        // If we get back response, kill the timer !
+        if (response.length) {
+          clearTimeout(interval);
+          let selectedDelivery = new Delivery(
+            response[0].velocity,
+            response[0].location
+          );
+          // Loop through all deliveries and find the closest one to the restaurant location
+          for (const delivery of response) {
+            const del = new Delivery(delivery.velocity, delivery.location);
+            if (
+              del.deliveryTime(restLoc) < selectedDelivery.deliveryTime(restLoc)
+            ) {
+              selectedDelivery = del;
+            }
+          }
+          // Next, Update order status
+          await Order.findByIdAndUpdate(orId, { status: 'delivering' });
+          // Finally wait till the delivery has completed
+          setTimeout(() => {
+            (async () => {
+              await Order.findByIdAndUpdate(orId, { status: 'delivered' });
+            })();
+          }, Math.ceil(selectedDelivery.deliverTime) * 1000);
+        }
+      })();
+      return backgroundTask;
+    })(),
+    30000
+  ); // Every 30 seconds call callback
+};
 
 exports.finalizeOrder = catchAsync(async (req, res, next) => {
   // 1. Check if restaurantId and carItems exist in req.boy
@@ -107,7 +147,10 @@ exports.finalizeOrder = catchAsync(async (req, res, next) => {
     totalPrice: finalTotalPrice,
     cartItems
   };
-  await Order.create(newOrder);
+  const order = await Order.create(newOrder);
+
+  // 8. Find delivery for the order and set its status
+  _setOrderStatus(order._id, restaurant.location);
 
   res.status(200).json({
     status: 'success',
@@ -145,7 +188,12 @@ exports.getMyOrders = catchAsync(async (req, res, next) => {
         status: 1,
         restaurantId: '$restaurant',
         restaurantName: '$restaurantInfo.name',
-        date: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+        date: {
+          $dateToString: {
+            format: '%Y-%m-%d %H:%M:%S',
+            date: '$createdAt'
+          }
+        },
         quantity: '$cartItems.quantity',
         items: {
           $filter: {
