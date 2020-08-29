@@ -22,8 +22,8 @@ This web app was originally built for internet engineering course assignment, bu
 - [x] User authentication & authorization (`jsonWebToken`, `password reset`, ...)
 - [x] Integrating `Google Sign in`
 - [x] Sending `emails` with Sendgrid
-- [x] Advanced `seaching`, `filtering` and `pagination`
-- [x] Ordering food and assigning a delivery to it
+- [x] Advanced `searching`, `filtering` and `pagination`
+- [x] `Ordering food` and assigning a `delivery` to it
 - [ ] And some more...!
 
 Of course no project is free of defects. And as usual, there is always a room for improvement.
