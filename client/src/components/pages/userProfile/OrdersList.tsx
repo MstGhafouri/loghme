@@ -18,7 +18,6 @@ class OrdersList extends React.Component<OrdersListProps> {
       return <p className="text-center mt-4">لیست سفارش‌های شما خالی می‌باشد</p>;
     if (isFetching) return;
     return userOrders
-      .reverse()
       .map((order, i) => <OrderItem key={order._id} {...order} index={i + 1} />);
   };
 
