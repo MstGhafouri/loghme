@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 process.on('uncaughtException', err => {
-  // eslint-disable-next-line no-console
   console.error('Uncaught Exception 🧨🧨🧨: \n', err.name, err.message);
+  console.error(err);
   process.exit(1);
 });
 
@@ -24,19 +25,17 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    // eslint-disable-next-line no-console
     console.log('DataBase connection established ✔✔✔');
   });
 
 const port = process.env.PORT || 3003;
 const server = app.listen(port, () => {
-  // eslint-disable-next-line no-console
   console.log(`Server started on port ${port}...`);
 });
 
 process.on('unhandledRejection', err => {
-  // eslint-disable-next-line no-console
   console.error('Unhandled Rejection 🧨🧨🧨: \n', err.name, err.message);
+  console.error(err);
   server.close(() => {
     process.exit(1);
   });
@@ -44,10 +43,8 @@ process.on('unhandledRejection', err => {
 
 // Heroku send every 24h SIGTERM to close the server
 process.on('SIGTERM', () => {
-  // eslint-disable-next-line no-console
   console.log('Sigterm signal received!. Shutting down gracefully!');
   server.close(() => {
-    // eslint-disable-next-line no-console
     console.log('Process terminated gracefully !');
   });
 });
