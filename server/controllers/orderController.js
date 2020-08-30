@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const Order = require('../models/orderModel');
 const User = require('../models/userModel');
 const Restaurant = require('../models/restaurantModel');
-const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 const Delivery = require('../utils/delivery');
+const serviceController = require('./serviceController');
 const catchAsync = require('../utils/catchAsync');
 const fetchResources = require('../utils/fetchResources');
 const { INTERVAL } = require('./restaurantController');
@@ -245,73 +245,8 @@ exports.getMyOrders = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createOrder = catchAsync(async (req, res, next) => {
-  const order = await Order.create(req.body);
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      order
-    }
-  });
-});
-
-exports.getOrder = catchAsync(async (req, res, next) => {
-  const order = await Order.findById(req.params.id);
-
-  if (!order)
-    return next(new AppError('سفارشی با شناسه درخواستی یافت نشد', 404));
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      order
-    }
-  });
-});
-
-exports.getAllOrders = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Order.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields();
-
-  const orders = await features.query;
-  //  SEND RESPONSE
-  res.status(200).json({
-    status: 'success',
-    results: orders.length,
-    data: {
-      orders
-    }
-  });
-});
-
-exports.updateOrder = catchAsync(async (req, res, next) => {
-  const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
-
-  if (!order)
-    return next(new AppError('سفارشی با شناسه درخواستی یافت نشد', 404));
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      order
-    }
-  });
-});
-
-exports.deleteOrder = catchAsync(async (req, res, next) => {
-  const order = await Order.findByIdAndDelete(req.params.id);
-
-  if (!order)
-    return next(new AppError('سفارشی با شناسه درخواستی یافت نشد', 404));
-
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});
+exports.getAllOrders = serviceController.getAll(Order);
+exports.getOrder = serviceController.getOne(Order);
+exports.createOrder = serviceController.createOne(Order);
+exports.updateOrder = serviceController.updateOne(Order);
+exports.deleteOrder = serviceController.deleteOne(Order);
